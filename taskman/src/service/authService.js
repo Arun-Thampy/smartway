@@ -31,6 +31,8 @@ import {AdminLoginURL, LoginURL} from "../apiManager/EndPoints"
         throw response;
       }
     } catch (error) {
+      console.log(error);
+      
       let message = "Something went wrong"
       throw error.response.data ?error.response.data:message;
     }
