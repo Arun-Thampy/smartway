@@ -52,7 +52,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/smartway/auth", authRoute);
 app.use("/smartway/admin", adminRoute);
 app.use("/smartway/user", userRoute);
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.json("Hello Arun");
 });
 
