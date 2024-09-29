@@ -54,7 +54,9 @@ app.use(
 app.use("/smartway/auth", authRoute);
 app.use("/smartway/admin", adminRoute);
 app.use("/smartway/user", userRoute);
-
+app.use("/" , (req , res)=>{
+  res.json("helo arun")
+})
 // Error handling middleware
 app.use(errorHandler);
 
