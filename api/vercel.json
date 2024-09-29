@@ -1,20 +1,46 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "src/**/*",    
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",      
-        "dest": "/"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/server.js",  // Path to the backend entry point
+      "use": "@vercel/node"    // Use Node.js runtime for backend
+    },
+    {
+      "src": "frontend/build/**/*", // Path to your static frontend files (if React or similar)
+      "use": "@vercel/static"       // Use static file handler for frontend
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",    // Route all API requests to the backend server.js in /api
+      "dest": "/api/server.js"
+    },
+    {
+      "src": "/(.*)",        // Route all other requests to static frontend files
+      "dest": "/frontend/build/$1"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",      // Apply CORS headers for all routes
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://smar-way-final-taskman-six.vercel.app"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        },
+        {
+          "key": "Access-Control-Allow-Credentials",
+          "value": "true"
+        }
+      ]
+    }
+  ]
+}

@@ -26,18 +26,21 @@ app.use(helmet());
 // CORS setup
 app.use(
   cors({
-    origin: "https://smar-way-final-taskman-six.vercel.app", // Frontend URL
-    methods: "GET, POST, PUT, DELETE", // Allowed HTTP methods
-    credentials: true, // Allow credentials (cookies, etc.)
+    origin: process.env.NODE_ENV === 'devlopment'
+      ? "https://smar-way-final-taskman-six.vercel.app"
+      : "http://localhost:3000",
+    methods: "GET, POST, PUT, DELETE",
+    credentials: true,
   })
 );
 
 // Handle preflight requests explicitly
 app.options('*', cors({
-  origin: "https://smar-way-final-taskman-six.vercel.app",
-  credentials: true, // Allow credentials for preflight
+  origin: process.env.NODE_ENV === 'devlopment'
+    ? "https://smar-way-final-taskman-six.vercel.app"
+    : "http://localhost:3000",
+  credentials: true,
 }));
-
 
 app.use(cookieParser());
 app.use(express.json());
@@ -47,6 +50,11 @@ app.use(
     secret: process.env.SESSION_SECRET || "your-default-secret",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      secure: process.env.NODE_ENV === 'devlopment', // Only use secure cookies in production
+      httpOnly: true,
+      sameSite: 'None', // Required for cross-site credentials
+    },
   })
 );
 
@@ -54,9 +62,10 @@ app.use(
 app.use("/smartway/auth", authRoute);
 app.use("/smartway/admin", adminRoute);
 app.use("/smartway/user", userRoute);
-app.use("/" , (req , res)=>{
-  res.json("helo arun")
-})
+app.use("/", (req, res) => {
+  res.json("Hello Arun");
+});
+
 // Error handling middleware
 app.use(errorHandler);
 
