@@ -1,46 +1,20 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "/server.js",  
-      "use": "@vercel/node"    
-    },
-    {
-      "src": "taskman/build/**/*", 
-      "use": "@vercel/static"      
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",    
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",        
-      "dest": "/taskman/build/$1"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",      
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "https://smar-way-final-taskman-six.vercel.app"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET, POST, PUT, DELETE"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        },
-        {
-          "key": "Access-Control-Allow-Credentials",
-          "value": "true"
-        }
-      ]
-    }
-  ]
-}
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "src/**/*",    
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",      
+        "dest": "/"
+      }
+    ]
+  }
+  
