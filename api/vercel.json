@@ -2,27 +2,27 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/server.js",  // Path to the backend entry point
-      "use": "@vercel/node"    // Use Node.js runtime for backend
+      "src": "api/server.js",  
+      "use": "@vercel/node"    
     },
     {
-      "src": "frontend/build/**/*", // Path to your static frontend files (if React or similar)
-      "use": "@vercel/static"       // Use static file handler for frontend
+      "src": "frontend/build/**/*", 
+      "use": "@vercel/static"      
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",    // Route all API requests to the backend server.js in /api
+      "src": "/api/(.*)",    
       "dest": "/api/server.js"
     },
     {
-      "src": "/(.*)",        // Route all other requests to static frontend files
+      "src": "/(.*)",        
       "dest": "/frontend/build/$1"
     }
   ],
   "headers": [
     {
-      "source": "/(.*)",      // Apply CORS headers for all routes
+      "source": "/(.*)",      
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
