@@ -1,20 +1,14 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "src/**/*",    
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",      
-        "dest": "/"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "**/*.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { "src": "/smartway/auth/(.*)", "dest": "/routes/authRoute.js" },
+    { "src": "/smartway/admin/(.*)", "dest": "/routes/adminRoute.js" },
+    { "src": "/smartway/user/(.*)", "dest": "/routes/userRoute.js" }
+  ]
+}
