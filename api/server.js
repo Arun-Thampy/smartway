@@ -26,7 +26,7 @@ app.use(helmet());
 // CORS setup
 app.use(
   cors({
-    origin: process.env.NODE_ENV === 'devlopment'
+    origin: process.env.NODE_ENV === 'development'
       ? "https://smar-way-final-taskman-six.vercel.app"
       : "http://localhost:3000",
     methods: "GET, POST, PUT, DELETE",
@@ -36,7 +36,7 @@ app.use(
 
 // Handle preflight requests explicitly
 app.options('*', cors({
-  origin: process.env.NODE_ENV === 'devlopment'
+  origin: process.env.NODE_ENV === 'development'
     ? "https://smar-way-final-taskman-six.vercel.app"
     : "http://localhost:3000",
   credentials: true,
@@ -45,18 +45,8 @@ app.options('*', cors({
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET || "your-default-secret",
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-      secure: process.env.NODE_ENV === 'devlopment', // Only use secure cookies in production
-      httpOnly: true,
-      sameSite: 'None', // Required for cross-site credentials
-    },
-  })
-);
+
+
 
 // Routes
 app.use("/smartway/auth", authRoute);
